@@ -56,6 +56,7 @@ class ViewController: UIViewController {
         guard let visionCoreMLModel = try? VNCoreMLModel(for: model.model) else { return }
         let sceneClassificationRequest = VNCoreMLRequest(model: visionCoreMLModel,
                                                          completionHandler: self.handleSceneClassificationResults)
+        self.faceBoxView.removeFromSuperview()
         
         /* 1. Create Vision face detection request
            - completion handler should take in handleFaceDetectionResults */
@@ -116,8 +117,6 @@ class ViewController: UIViewController {
     }
     
     private func addFaceBoxView(faceBoundingBox: CGRect) {
-        self.faceBoxView.removeFromSuperview()
-        
         let faceBoxView = UIView()
         
         let boxViewFrame = transformRectInView(visionRect: faceBoundingBox, view: self.imageView)
