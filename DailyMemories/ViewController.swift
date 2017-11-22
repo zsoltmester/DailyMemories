@@ -16,13 +16,28 @@ class ViewController: UIViewController {
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var captionLabel: UILabel!
     let imagePickerController = UIImagePickerController()
+    let formatter = DateFormatter()
+    
+    var currentDateString: String {
+        let now = Date()
+        return formatter.string(from:now)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         imageView.layer.cornerRadius = 10
         imagePickerController.delegate = self
+        
+        formatter.dateFormat = "MMM dd, YYYY"
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        dateLabel.text = currentDateString
+    }
+    
     
     @IBAction func takePhoto() {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
