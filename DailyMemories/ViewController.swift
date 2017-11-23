@@ -59,6 +59,7 @@ class ViewController: UIViewController {
         guard let visionCoreMLModel = try? VNCoreMLModel(for: model.model) else { return }
         let sceneClassificationRequest = VNCoreMLRequest(model: visionCoreMLModel,
                                                          completionHandler: self.handleSceneClassificationResults)
+        self.faceBoxView.removeFromSuperview()
         
         // Create Vision face detection request
         let faceDetectionRequest = VNDetectFaceRectanglesRequest(completionHandler: self.handleFaceDetectionResults)
@@ -122,6 +123,8 @@ class ViewController: UIViewController {
     }
     
     func classifyFacialExpression(cgImage: CGImage, cgImageOrientation: CGImagePropertyOrientation) {
+        self.expressionClassificationLabel.text = "Classifying expression.."
+        
         // 1. Create Vision Core ML request with EmotiClassifier model
         
         // 👨🏿‍💻 YOUR CODE GOES HERE
