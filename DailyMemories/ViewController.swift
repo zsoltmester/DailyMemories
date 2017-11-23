@@ -20,13 +20,27 @@ class ViewController: UIViewController {
     var faceBoxView: UIView = UIView()
     let imagePickerController = UIImagePickerController()
     
+    let formatter = DateFormatter()
+    
+    var currentDateString: String {
+        let now = Date()
+        return formatter.string(from:now)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        formatter.dateFormat = "MMM dd, YYYY"
         captureMemoryButton.layer.cornerRadius = 10
         imagePickerController.delegate = self
         expressionClassificationLabel.text = "how are you today? 🤔"
         sceneClassificationLabel.text = "where are you today? 🏖"
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        dateLabel.text = currentDateString
     }
     
     @IBAction func takePhoto() {
