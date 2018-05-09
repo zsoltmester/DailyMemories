@@ -1,0 +1,7 @@
+/Build/
+/DerivedData/
+/Index/
+
+xcuserdata/
+
+*.xcscmblueprint
